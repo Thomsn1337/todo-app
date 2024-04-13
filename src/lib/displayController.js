@@ -70,6 +70,17 @@ const DisplayController = (function () {
             const item = listItem(list.name, list.id);
             listWrapper.appendChild(item);
 
+            if (list.active) {
+                item.classList.add("active");
+            }
+
+            const listName = item.querySelector(`#name-${list.id}`);
+            listName.addEventListener("click", () => {
+                ListStorage.resetActive();
+                list.active = true;
+                renderLists();
+            });
+
             const editButton = item.querySelector(`#edit-${list.id}`);
             editButton.addEventListener("click", () => {
                 renderEditListForm(list);

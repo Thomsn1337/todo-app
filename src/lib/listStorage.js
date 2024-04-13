@@ -14,10 +14,24 @@ const ListStorage = (function () {
         return lists.indexOf(list);
     }
 
+    function getActiveList() {
+        return lists.find((list) => list.active === true);
+    }
+
+    function resetActive() {
+        const activeList = getActiveList();
+        if (!activeList) {
+            return;
+        }
+
+        activeList.active = false;
+    }
+
     return {
         lists,
         addNewList,
         deleteList,
+        resetActive,
     };
 })();
 
