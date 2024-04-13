@@ -1,4 +1,5 @@
 import listForm from "../components/listForm";
+import TodoList from "./todoList";
 
 const DisplayController = (function () {
     const dialog = document.querySelector("dialog");
@@ -12,11 +13,18 @@ const DisplayController = (function () {
 
     function renderNewListForm() {
         clearDialog();
-        dialog.appendChild(listForm("New list"));
 
-        const closeButton = dialog.querySelector("#form-close");
+        const newListForm = listForm("New List");
+        dialog.appendChild(newListForm);
+
+        const closeButton = newListForm.querySelector("#form-close");
         closeButton.addEventListener("click", () => {
             dialog.close();
+        });
+
+        newListForm.addEventListener("submit", () => {
+            const name = newListForm.querySelector("#list-name").value;
+            const list = new TodoList(name);
         });
 
         dialog.showModal();
