@@ -8,6 +8,11 @@ const DisplayController = (function () {
     const newListButton = document.querySelector("#new-list");
 
     function init() {
+        if (ListStorage.lists.length === 0) {
+            ListStorage.addNewList(new TodoList("Default"));
+            renderLists();
+        }
+
         newListButton.addEventListener("click", () => {
             renderNewListForm();
         });
@@ -84,7 +89,6 @@ const DisplayController = (function () {
 
     return {
         init,
-        renderLists,
     };
 })();
 

@@ -130,6 +130,7 @@ ul {
 }
 
 .list-item p {
+    user-select: none;
     display: flex;
     align-items: center;
     height: 100%;
