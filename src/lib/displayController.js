@@ -39,7 +39,14 @@ const DisplayController = (function () {
 
         const lists = ListStorage.lists;
         lists.forEach((list) => {
-            listWrapper.appendChild(listItem(list.name, list.id));
+            const item = listItem(list.name, list.id);
+            listWrapper.appendChild(item);
+
+            const deleteButton = item.querySelector(`#delete-${list.id}`);
+            deleteButton.addEventListener("click", () => {
+                ListStorage.deleteList(list);
+                renderLists();
+            });
         });
     }
 
