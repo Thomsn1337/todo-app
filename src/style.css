@@ -99,7 +99,121 @@ button#new-list:hover {
     color: var(--color-crust);
 }
 
+.list-wrapper {
+    width: var(--side-content-width);
+    padding: 5%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list-wrapper ul {
+    margin-top: 20px;
+}
+
+.list-item {
+    padding: 0 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    transition: 0.15s;
+}
+
+.list-item:hover,
+.list-item.active {
+    background-color: var(--color-base);
+    border-left: 3px solid var(--color-blue);
+}
+
+.list-item p {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    margin-right: 10px;
+    flex: 1 1 auto;
+    overflow: auto;
+    cursor: pointer;
+}
+
+.list-button-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.list-button-wrapper ion-icon {
+    margin: 0 2px;
+    color: var(--color-subtext);
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.list-button-wrapper ion-icon:hover {
+    color: var(--color-text);
+}
+
 main {
     background-color: var(--color-base);
     grid-area: main;
+}
+
+.input-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper label,
+.input-wrapper input {
+    font-size: 1.1em;
+    color: var(--color-text);
+}
+
+.input-wrapper input {
+    margin-top: 5px;
+    background: transparent;
+    height: 35px;
+    padding: 0 8px;
+    border: 2px solid var(--color-blue);
+    border-radius: 10px;
+}
+
+dialog::backdrop {
+    background-color: black;
+    opacity: 0.5;
+}
+
+dialog {
+    color: var(--color-text);
+    background-color: var(--color-base);
+    border: 2px solid var(--color-blue);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+dialog form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#form-close {
+    font-size: 1.6em;
+    cursor: pointer;
+}
+
+.submit {
+    margin-top: 20px;
 }
