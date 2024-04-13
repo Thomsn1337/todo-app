@@ -16,7 +16,7 @@ const DisplayController = (function () {
     function renderNewListForm() {
         clearDialog();
 
-        const newListForm = listForm("New List");
+        const newListForm = listForm("New list");
         dialog.appendChild(newListForm);
 
         const closeButton = newListForm.querySelector("#form-close");
@@ -33,6 +33,29 @@ const DisplayController = (function () {
         dialog.showModal();
     }
 
+    function renderEditListForm(list) {
+        clearDialog();
+
+        const editListForm = listForm("Edit list");
+        dialog.appendChild(editListForm);
+
+        const closeButton = editListForm.querySelector("#form-close");
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
+
+        const inputField = editListForm.querySelector("input");
+        inputField.value = list.name;
+
+        editListForm.addEventListener("submit", () => {
+            const name = editListForm.querySelector("#list-name").value;
+            list.name = name;
+            renderLists();
+        });
+
+        dialog.showModal();
+    }
+
     function renderLists() {
         const listWrapper = document.querySelector(".list-wrapper ul");
         listWrapper.innerHTML = "";
@@ -41,6 +64,11 @@ const DisplayController = (function () {
         lists.forEach((list) => {
             const item = listItem(list.name, list.id);
             listWrapper.appendChild(item);
+
+            const editButton = item.querySelector(`#edit-${list.id}`);
+            editButton.addEventListener("click", () => {
+                renderEditListForm(list);
+            });
 
             const deleteButton = item.querySelector(`#delete-${list.id}`);
             deleteButton.addEventListener("click", () => {
