@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --color-base: #24273a;
+    --color-mantle: #1e2030;
+    --color-crust: #181926;
+    --color-text: #cad3f5;
+    --color-subtext: #494d64;
+    --color-green: #a6da95;
+    --color-orange: #f5a97f;
+    --color-red: #ed8796;
+    --color-blue: #8aadf4;
+
+    --header-height: 80px;
+    --side-content-width: 85%;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    color: var(--color-text);
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr;
+    grid-template-columns: 300px 1fr;
+    grid-template-areas:
+        "side header"
+        "side main";
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 0 20px;
+    background-color: var(--color-mantle);
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+aside {
+    background-color: var(--color-crust);
+    grid-area: side;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-wrapper {
+    width: var(--side-content-width);
+    height: var(--header-height);
+    border-bottom: 2px solid var(--color-mantle);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    height: 40px;
+    background: transparent;
+    font-size: 1.2em;
+    color: var(--color-text);
+    font-weight: 500;
+    border: 2px solid var(--color-blue);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button#new-task {
+    width: 120px;
+}
+
+button#new-list {
+    width: 95%;
+}
+
+button:hover {
+    background-color: var(--color-blue);
+    color: var(--color-base);
+}
+
+button#new-task:hover {
+    color: var(--color-mantle);
+}
+
+button#new-list:hover {
+    color: var(--color-crust);
+}
+
+main {
+    background-color: var(--color-base);
+    grid-area: main;
+}
