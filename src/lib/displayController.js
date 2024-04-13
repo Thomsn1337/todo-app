@@ -2,6 +2,13 @@ import listForm from "../components/listForm";
 
 const DisplayController = (function () {
     const dialog = document.querySelector("dialog");
+    const newListButton = document.querySelector("#new-list");
+
+    function init() {
+        newListButton.addEventListener("click", () => {
+            renderNewListForm();
+        });
+    }
 
     function renderNewListForm() {
         clearDialog();
@@ -19,6 +26,9 @@ const DisplayController = (function () {
         dialog.innerHTML = "";
     }
 
+    return {
+        init,
+    };
 })();
 
 export default DisplayController;
