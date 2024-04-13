@@ -1,4 +1,5 @@
 import listForm from "../components/listForm";
+import listItem from "../components/listItem";
 import TodoList from "./todoList";
 import ListStorage from "./listStorage";
 
@@ -26,9 +27,20 @@ const DisplayController = (function () {
         newListForm.addEventListener("submit", () => {
             const name = newListForm.querySelector("#list-name").value;
             ListStorage.addNewList(new TodoList(name));
+            renderLists();
         });
 
         dialog.showModal();
+    }
+
+    function renderLists() {
+        const listWrapper = document.querySelector(".list-wrapper ul");
+        listWrapper.innerHTML = "";
+
+        const lists = ListStorage.lists;
+        lists.forEach((list) => {
+            listWrapper.appendChild(listItem(list.name, list.id));
+        });
     }
 
     function clearDialog() {
@@ -37,6 +49,7 @@ const DisplayController = (function () {
 
     return {
         init,
+        renderLists,
     };
 })();
 
