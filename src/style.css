@@ -99,6 +99,64 @@ button#new-list:hover {
     color: var(--color-crust);
 }
 
+.list-wrapper {
+    width: var(--side-content-width);
+    padding: 5%;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list-wrapper ul {
+    margin-top: 20px;
+}
+
+.list-item {
+    padding: 0 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+    transition: 0.15s;
+}
+
+.list-item:hover,
+.list-item.active {
+    background-color: var(--color-base);
+    border-left: 3px solid var(--color-blue);
+}
+
+.list-item p {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    margin-right: 10px;
+    flex: 1 1 auto;
+    overflow: auto;
+    cursor: pointer;
+}
+
+.list-button-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.list-button-wrapper ion-icon {
+    margin: 0 2px;
+    color: var(--color-subtext);
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.list-button-wrapper ion-icon:hover {
+    color: var(--color-text);
+}
+
 main {
     background-color: var(--color-base);
     grid-area: main;
