@@ -103,3 +103,24 @@ main {
     background-color: var(--color-base);
     grid-area: main;
 }
+
+.input-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper label,
+.input-wrapper input {
+    font-size: 1.1em;
+    color: var(--color-text);
+}
+
+.input-wrapper input {
+    margin-top: 5px;
+    background: transparent;
+    height: 35px;
+    padding: 0 8px;
+    border: 2px solid var(--color-blue);
+    border-radius: 10px;
+}
