@@ -1,5 +1,6 @@
 import listForm from "../components/listForm";
 import TodoList from "./todoList";
+import ListStorage from "./listStorage";
 
 const DisplayController = (function () {
     const dialog = document.querySelector("dialog");
@@ -24,7 +25,7 @@ const DisplayController = (function () {
 
         newListForm.addEventListener("submit", () => {
             const name = newListForm.querySelector("#list-name").value;
-            const list = new TodoList(name);
+            ListStorage.addNewList(new TodoList(name));
         });
 
         dialog.showModal();
