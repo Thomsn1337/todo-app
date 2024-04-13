@@ -124,3 +124,37 @@ main {
     border: 2px solid var(--color-blue);
     border-radius: 10px;
 }
+
+dialog::backdrop {
+    background-color: black;
+    opacity: 0.5;
+}
+
+dialog {
+    color: var(--color-text);
+    background-color: var(--color-base);
+    border: 2px solid var(--color-blue);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+dialog form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#form-close {
+    font-size: 1.6em;
+    cursor: pointer;
+}
+
+.submit {
+    margin-top: 20px;
+}
