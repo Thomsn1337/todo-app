@@ -1,0 +1,22 @@
+{
+    "name": "webpack-todo",
+    "version": "1.0.0",
+    "description": "This is a simple TODO app written in JavaScript using Webpack. It's the final project of the section \"Organizing your JavaScript code\" section of the Odin Project curriculum, which teaches mostly about object oriented programming principles.",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack --config webpack.prod.js",
+        "start": "webpack serve --open --config webpack.dev.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "GPL-3.0-only",
+    "devDependencies": {
+        "css-loader": "^7.1.0",
+        "html-webpack-plugin": "^5.6.0",
+        "style-loader": "^4.0.0",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.0.4",
+        "webpack-merge": "^5.10.0"
+    }
+}
