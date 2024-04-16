@@ -26,7 +26,7 @@ function taskForm(title) {
 
     const submitButton = document.createElement("button");
     submitButton.classList.add("submit");
-    submitButton.id = "list-submit";
+    submitButton.id = "task-submit";
     submitButton.type = "submit";
     submitButton.textContent = "Save";
 
