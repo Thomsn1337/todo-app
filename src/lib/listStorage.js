@@ -1,4 +1,4 @@
-const ListStorage = (function () {
+const ListStorage = (function() {
     const lists = [];
 
     function addNewList(list) {
@@ -31,6 +31,7 @@ const ListStorage = (function () {
         lists,
         addNewList,
         deleteList,
+        getActiveList,
         resetActive,
     };
 })();
