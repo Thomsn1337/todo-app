@@ -1,11 +1,13 @@
 import listForm from "../components/listForm";
+import taskForm from "../components/taskForm";
 import listItem from "../components/listItem";
 import TodoList from "./todoList";
 import ListStorage from "./listStorage";
 
-const DisplayController = (function () {
+const DisplayController = (function() {
     const dialog = document.querySelector("dialog");
     const newListButton = document.querySelector("#new-list");
+    const newTaskButton = document.querySelector("#new-task");
 
     function init() {
         if (ListStorage.lists.length === 0) {
@@ -15,6 +17,10 @@ const DisplayController = (function () {
 
         newListButton.addEventListener("click", () => {
             renderNewListForm();
+        });
+
+        newTaskButton.addEventListener("click", () => {
+            renderNewTaskForm();
         });
     }
 
@@ -92,6 +98,19 @@ const DisplayController = (function () {
                 renderLists();
             });
         });
+    }
+
+    function renderNewTaskForm() {
+        clearDialog();
+        const newTaskForm = taskForm("New Task");
+        dialog.appendChild(newTaskForm);
+
+        const closeButton = newTaskForm.querySelector("#form-close");
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
+
+        dialog.showModal();
     }
 
     function clearDialog() {
