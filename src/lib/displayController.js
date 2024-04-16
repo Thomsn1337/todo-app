@@ -162,6 +162,34 @@ const DisplayController = (function() {
         dialog.showModal();
     }
 
+    function renderEditTaskForm(task) {
+        clearDialog();
+
+        const editTaskForm = taskForm("Edit task");
+        dialog.appendChild(editTaskForm);
+
+        const closeButton = editTaskForm.querySelector("#form-close");
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+        });
+
+        editTaskForm.querySelector("#title").value = task.name;
+        editTaskForm.querySelector("#description").value = task.description;
+        editTaskForm.querySelector("#due-date").valueAsDate = task.dueDate;
+        editTaskForm.querySelector("#priority").value = task.priority;
+
+        editTaskForm.addEventListener("submit", () => {
+            task.name = editTaskForm.querySelector("#title").value;
+            task.description = editTaskForm.querySelector("#description").value;
+            task.dueDate = editTaskForm.querySelector("#due-date").valueAsDate;
+            task.priority = editTaskForm.querySelector("#priority").value;
+
+            renderTasks();
+        });
+
+        dialog.showModal();
+    }
+
     function renderTasks() {
         newTaskButton.classList.remove("hidden");
         const taskWrapper = document.querySelector(".task-wrapper");
@@ -193,6 +221,11 @@ const DisplayController = (function() {
                 deleteButton.addEventListener("click", () => {
                     activeList.deleteTask(task);
                     renderTasks();
+                });
+
+                const editButton = item.querySelector(`#edit-${task.id}`);
+                editButton.addEventListener("click", () => {
+                    renderEditTaskForm(task);
                 });
 
                 const toggleButton = item.querySelector(`#toggle-${task.id}`);
@@ -228,6 +261,11 @@ const DisplayController = (function() {
                 deleteButton.addEventListener("click", () => {
                     activeList.deleteCompletedTask(task);
                     renderTasks();
+                });
+
+                const editButton = item.querySelector(`#edit-${task.id}`);
+                editButton.addEventListener("click", () => {
+                    renderEditTaskForm(task);
                 });
 
                 const toggleButton = item.querySelector(`#toggle-${task.id}`);
