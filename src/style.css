@@ -147,20 +147,74 @@ ul {
     align-items: center;
 }
 
-.list-button-wrapper ion-icon {
+ion-icon {
     margin: 0 2px;
     color: var(--color-subtext);
     cursor: pointer;
     transition: 0.15s;
 }
 
-.list-button-wrapper ion-icon:hover {
+ion-icon:hover {
     color: var(--color-text);
 }
 
 main {
     background-color: var(--color-base);
     grid-area: main;
+    padding: 30px 50px;
+}
+
+.task-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--color-crust);
+    height: 60px;
+    padding: 0 10px;
+    border-radius: 20px;
+}
+
+.task-item.priority-low {
+    border-left: 20px solid var(--color-green);
+}
+
+.task-item.priority-medium {
+    border-left: 20px solid var(--color-orange);
+}
+
+.task-item.priority-high {
+    border-left: 20px solid var(--color-red);
+}
+
+.task-item p {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.task-item .task-name {
+    font-size: 1.3em;
+    flex: 1 1 auto;
+}
+
+.task-item .date {
+    font-size: 1.1em;
+}
+
+.task-item .task-button-wrapper {
+    width: 100px;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.2em;
+    margin-left: 20px;
 }
 
 .input-wrapper {
@@ -230,4 +284,8 @@ dialog form {
 
 .submit {
     margin-top: 20px;
+}
+
+.hidden {
+    visibility: hidden;
 }
