@@ -8,15 +8,17 @@ function listItem(name, id) {
     listName.id = `name-${id}`;
 
     const buttonWrapper = document.createElement("div");
-    buttonWrapper.classList.add("list-button-wrapper")
+    buttonWrapper.classList.add("list-button-wrapper");
 
     const editButton = document.createElement("ion-icon");
     editButton.name = "create-outline";
     editButton.id = `edit-${id}`;
+    editButton.title = "Edit list";
 
     const deleteButton = document.createElement("ion-icon");
     deleteButton.name = "trash-outline";
     deleteButton.id = `delete-${id}`;
+    deleteButton.title = "Delete list";
 
     buttonWrapper.appendChild(editButton);
     buttonWrapper.appendChild(deleteButton);
