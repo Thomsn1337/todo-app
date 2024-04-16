@@ -236,7 +236,7 @@ const DisplayController = (function() {
 
     function clearTasks() {
         newTaskButton.classList.add("hidden");
-        taskWrapper.innerHTML = "";
+        document.querySelector(".task-wrapper").innerHTML = "";
     }
 
     return {
