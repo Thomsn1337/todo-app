@@ -194,6 +194,12 @@ const DisplayController = (function() {
                     activeList.deleteTask(task);
                     renderTasks();
                 });
+
+                const toggleButton = item.querySelector(`#toggle-${task.id}`);
+                toggleButton.addEventListener("click", () => {
+                    activeList.markTaskDone(task);
+                    renderTasks();
+                });
             });
 
             taskWrapper.appendChild(title);
@@ -221,6 +227,12 @@ const DisplayController = (function() {
                 const deleteButton = item.querySelector(`#delete-${task.id}`);
                 deleteButton.addEventListener("click", () => {
                     activeList.deleteCompletedTask(task);
+                    renderTasks();
+                });
+
+                const toggleButton = item.querySelector(`#toggle-${task.id}`);
+                toggleButton.addEventListener("click", () => {
+                    activeList.markTaskUndone(task);
                     renderTasks();
                 });
             });

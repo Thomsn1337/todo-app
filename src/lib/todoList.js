@@ -32,6 +32,18 @@ class TodoList {
         const index = this.#getCompletedTaskIndex(task);
         this.completed.splice(index, 1);
     }
+
+    markTaskDone(task) {
+        task.state = "done";
+        this.completed.push(task);
+        this.deleteTask(task);
+    }
+
+    markTaskUndone(task) {
+        task.state = "progress";
+        this.tasks.push(task);
+        this.deleteCompletedTask(task);
+    }
 }
 
 export default TodoList;
