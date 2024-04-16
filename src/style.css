@@ -112,6 +112,8 @@ ul {
 
 .list-wrapper ul {
     margin-top: 20px;
+    max-height: 600px;
+    overflow: auto;
 }
 
 .list-item {
@@ -162,11 +164,17 @@ main {
     background-color: var(--color-base);
     grid-area: main;
     padding: 30px 50px;
+    overflow: auto;
 }
 
-.task-wrapper {
-    display: flex;
-    flex-direction: column;
+.task-wrapper h2 {
+    margin-bottom: 20px;
+}
+
+ul.task-list {
+    max-height: 40%;
+    overflow: auto;
+    margin-bottom: 30px;
 }
 
 .task-item {
@@ -288,4 +296,31 @@ dialog form {
 
 .hidden {
     visibility: hidden;
+}
+
+#task-info {
+    width: 400px;
+    max-height: 600px;
+}
+
+#task-info .task-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.task-info h3,
+.task-info p {
+    padding: 0;
+    margin: 0;
+}
+
+.info-wrapper {
+    margin-top: 15px;
+    padding: 0 5px;
+}
+
+p#task-desc {
+    max-height: 150px;
+    overflow: auto;
+    word-wrap: break-word;
 }

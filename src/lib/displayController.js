@@ -2,6 +2,7 @@ import listForm from "../components/listForm";
 import taskForm from "../components/taskForm";
 import listItem from "../components/listItem";
 import taskItem from "../components/taskItem";
+import taskInfoDialog from "../components/taskInfoDialog";
 import ListStorage from "./listStorage";
 import TodoList from "./todoList";
 import Task from "./task";
@@ -63,6 +64,7 @@ const DisplayController = (function() {
         const closeButton = newListForm.querySelector("#form-close");
         closeButton.addEventListener("click", () => {
             dialog.close();
+            clearDialog();
         });
 
         newListForm.addEventListener("submit", () => {
@@ -83,6 +85,7 @@ const DisplayController = (function() {
         const closeButton = editListForm.querySelector("#form-close");
         closeButton.addEventListener("click", () => {
             dialog.close();
+            clearDialog();
         });
 
         const inputField = editListForm.querySelector("input");
@@ -98,13 +101,18 @@ const DisplayController = (function() {
     }
 
     function renderLists() {
-        const listWrapper = document.querySelector(".list-wrapper ul");
+        const listWrapper = document.querySelector(".list-wrapper");
         listWrapper.innerHTML = "";
+
+        const listTitle = document.createElement("h2");
+        listTitle.textContent = `Lists (${ListStorage.lists.length})`;
+
+        const listContainer = document.createElement("ul");
 
         const lists = ListStorage.lists;
         lists.forEach((list) => {
             const item = listItem(list.name, list.id);
-            listWrapper.appendChild(item);
+            listContainer.appendChild(item);
 
             if (list.active) {
                 item.classList.add("active");
@@ -132,6 +140,9 @@ const DisplayController = (function() {
                 }
             });
         });
+
+        listWrapper.appendChild(listTitle);
+        listWrapper.appendChild(listContainer);
     }
 
     function renderNewTaskForm() {
@@ -144,6 +155,7 @@ const DisplayController = (function() {
         const closeButton = newTaskForm.querySelector("#form-close");
         closeButton.addEventListener("click", () => {
             dialog.close();
+            clearDialog();
         });
 
         newTaskForm.addEventListener("submit", () => {
@@ -171,6 +183,7 @@ const DisplayController = (function() {
         const closeButton = editTaskForm.querySelector("#form-close");
         closeButton.addEventListener("click", () => {
             dialog.close();
+            clearDialog();
         });
 
         editTaskForm.querySelector("#title").value = task.name;
@@ -190,6 +203,22 @@ const DisplayController = (function() {
         dialog.showModal();
     }
 
+    function renderTaskInfo(task) {
+        clearDialog();
+        dialog.id = "task-info";
+
+        const taskInfo = taskInfoDialog(task);
+        dialog.appendChild(taskInfo);
+
+        const closeButton = taskInfo.querySelector("#form-close");
+        closeButton.addEventListener("click", () => {
+            dialog.close();
+            clearDialog();
+        });
+
+        dialog.showModal();
+    }
+
     function renderTasks() {
         newTaskButton.classList.remove("hidden");
         const taskWrapper = document.querySelector(".task-wrapper");
@@ -200,11 +229,12 @@ const DisplayController = (function() {
         const completedTasks = activeList.completed;
 
         if (activeTasks.length > 0) {
-            const activeTaskWrapper = document.createElement("ul");
-            activeTaskWrapper.classList.add("task-list");
-
             const title = document.createElement("h2");
             title.textContent = `Active tasks (${activeTasks.length})`;
+            title.id = "active-tasks";
+
+            const activeTaskWrapper = document.createElement("ul");
+            activeTaskWrapper.classList.add("task-list");
 
             activeTasks.forEach((task) => {
                 const item = taskItem(
@@ -228,6 +258,11 @@ const DisplayController = (function() {
                     renderEditTaskForm(task);
                 });
 
+                const infoButton = item.querySelector(`#info-${task.id}`);
+                infoButton.addEventListener("click", () => {
+                    renderTaskInfo(task);
+                });
+
                 const toggleButton = item.querySelector(`#toggle-${task.id}`);
                 toggleButton.addEventListener("click", () => {
                     activeList.markTaskDone(task);
@@ -240,11 +275,12 @@ const DisplayController = (function() {
         }
 
         if (completedTasks.length > 0) {
-            const completedTaskWrapper = document.createElement("ul");
-            completedTaskWrapper.classList.add("task-list");
-
             const title = document.createElement("h2");
             title.textContent = `Completed tasks (${completedTasks.length})`;
+            title.id = "completed-tasks";
+
+            const completedTaskWrapper = document.createElement("ul");
+            completedTaskWrapper.classList.add("task-list");
 
             completedTasks.forEach((task) => {
                 const item = taskItem(
@@ -268,6 +304,11 @@ const DisplayController = (function() {
                     renderEditTaskForm(task);
                 });
 
+                const infoButton = item.querySelector(`#info-${task.id}`);
+                infoButton.addEventListener("click", () => {
+                    renderTaskInfo(task);
+                });
+
                 const toggleButton = item.querySelector(`#toggle-${task.id}`);
                 toggleButton.addEventListener("click", () => {
                     activeList.markTaskUndone(task);
@@ -282,6 +323,7 @@ const DisplayController = (function() {
 
     function clearDialog() {
         dialog.innerHTML = "";
+        dialog.id = "";
     }
 
     function clearTasks() {
