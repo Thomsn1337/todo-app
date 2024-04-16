@@ -179,15 +179,21 @@ const DisplayController = (function() {
             title.textContent = `Active tasks (${activeTasks.length})`;
 
             activeTasks.forEach((task) => {
-                activeTaskWrapper.appendChild(
-                    taskItem(
-                        task.name,
-                        task.id,
-                        task.dueDate,
-                        task.priority,
-                        task.state,
-                    ),
+                const item = taskItem(
+                    task.name,
+                    task.id,
+                    task.dueDate,
+                    task.priority,
+                    task.state,
                 );
+
+                activeTaskWrapper.appendChild(item);
+
+                const deleteButton = item.querySelector(`#delete-${task.id}`);
+                deleteButton.addEventListener("click", () => {
+                    activeList.deleteTask(task);
+                    renderTasks();
+                });
             });
 
             taskWrapper.appendChild(title);
@@ -202,15 +208,21 @@ const DisplayController = (function() {
             title.textContent = `Completed tasks (${completedTasks.length})`;
 
             completedTasks.forEach((task) => {
-                completedTaskWrapper.appendChild(
-                    taskItem(
-                        task.name,
-                        task.id,
-                        task.dueDate,
-                        task.priority,
-                        task.state,
-                    ),
+                const item = taskItem(
+                    task.name,
+                    task.id,
+                    task.dueDate,
+                    task.priority,
+                    task.state,
                 );
+
+                completedTaskWrapper.appendChild(item);
+
+                const deleteButton = item.querySelector(`#delete-${task.id}`);
+                deleteButton.addEventListener("click", () => {
+                    activeList.deleteCompletedTask(task);
+                    renderTasks();
+                });
             });
 
             taskWrapper.appendChild(title);
