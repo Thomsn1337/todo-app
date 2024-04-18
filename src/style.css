@@ -99,6 +99,11 @@ button#new-list:hover {
     color: var(--color-crust);
 }
 
+p {
+    white-space: nowrap;
+    overflow: auto;
+}
+
 .list-wrapper {
     width: var(--side-content-width);
     padding: 5%;
@@ -204,11 +209,14 @@ ul.task-list {
     height: 100%;
     display: flex;
     align-items: center;
+    flex: 0 0 auto;
 }
 
 .task-item .task-name {
     font-size: 1.3em;
     flex: 1 1 auto;
+    overflow: auto;
+    margin-right: 20px;
 }
 
 .task-item .date {
@@ -317,6 +325,12 @@ dialog form {
 .info-wrapper {
     margin-top: 15px;
     padding: 0 5px;
+}
+
+.info-wrapper p {
+    white-space: wrap;
+    word-wrap: break-word;
+    max-height: 60px;
 }
 
 p#task-desc {
