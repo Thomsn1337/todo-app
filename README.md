@@ -7,5 +7,6 @@ principles.
 
 ## Links
 
+- [Preview](https://thomsn1337.github.io/todo-app/)
 - [Assignment Page](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)
 - [About Odin](https://www.theodinproject.com/about)
