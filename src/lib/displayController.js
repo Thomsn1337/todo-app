@@ -16,12 +16,10 @@ const DisplayController = (function () {
     function init() {
         newListButton.addEventListener("click", () => {
             renderNewListForm();
-            StorageLoader.update();
         });
 
         newTaskButton.addEventListener("click", () => {
             renderNewTaskForm();
-            StorageLoader.update();
         });
 
         StorageLoader.init();
@@ -45,6 +43,7 @@ const DisplayController = (function () {
         newListForm.addEventListener("submit", () => {
             const name = newListForm.querySelector("#list-name").value;
             ListStorage.addNewList(new TodoList(name));
+            StorageLoader.update();
             renderLists();
         });
 
@@ -69,6 +68,7 @@ const DisplayController = (function () {
         editListForm.addEventListener("submit", () => {
             const name = editListForm.querySelector("#list-name").value;
             list.name = name;
+            StorageLoader.update();
             renderLists();
         });
 
@@ -105,7 +105,6 @@ const DisplayController = (function () {
             const editButton = item.querySelector(`#edit-${list.id}`);
             editButton.addEventListener("click", () => {
                 renderEditListForm(list);
-                StorageLoader.update();
             });
 
             const deleteButton = item.querySelector(`#delete-${list.id}`);
@@ -147,6 +146,7 @@ const DisplayController = (function () {
 
             const task = new Task(title, description, dueDate, priority);
             activeList.addTask(task);
+            StorageLoader.update();
             renderTasks();
         });
 
@@ -176,6 +176,7 @@ const DisplayController = (function () {
             task.dueDate = editTaskForm.querySelector("#due-date").valueAsDate;
             task.priority = editTaskForm.querySelector("#priority").value;
 
+            StorageLoader.update();
             renderTasks();
         });
 
@@ -235,7 +236,6 @@ const DisplayController = (function () {
 
                 const editButton = item.querySelector(`#edit-${task.id}`);
                 editButton.addEventListener("click", () => {
-                    StorageLoader.update();
                     renderEditTaskForm(task);
                 });
 
@@ -284,7 +284,6 @@ const DisplayController = (function () {
 
                 const editButton = item.querySelector(`#edit-${task.id}`);
                 editButton.addEventListener("click", () => {
-                    StorageLoader.update();
                     renderEditTaskForm(task);
                 });
 
