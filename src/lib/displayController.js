@@ -6,53 +6,28 @@ import taskInfoDialog from "../components/taskInfoDialog";
 import ListStorage from "./listStorage";
 import TodoList from "./todoList";
 import Task from "./task";
+import StorageLoader from "./storageLoader";
 
-const DisplayController = (function() {
+const DisplayController = (function () {
     const dialog = document.querySelector("dialog");
     const newListButton = document.querySelector("#new-list");
     const newTaskButton = document.querySelector("#new-task");
 
     function init() {
-        if (ListStorage.lists.length === 0) {
-            const defaultList = new TodoList("Default");
-            defaultList.active = true;
-            ListStorage.addNewList(defaultList);
-
-            const defaultTask = new Task(
-                "Default task",
-                "this is a default task",
-                new Date(Date.now()),
-                "medium",
-            );
-            const defaultTask2 = new Task(
-                "Default task",
-                "this is a default task",
-                new Date(Date.now() + 10),
-                "low",
-            );
-            defaultList.addTask(defaultTask);
-            defaultList.addTask(defaultTask2);
-
-            const completedTask = new Task(
-                "Completed task",
-                "this is a completed task",
-                new Date(Date.now() + 100),
-                "high",
-            );
-            completedTask.state = "done";
-
-            defaultList.addCompletedTask(completedTask);
-            renderLists();
-            renderTasks();
-        }
-
         newListButton.addEventListener("click", () => {
             renderNewListForm();
+            StorageLoader.update();
         });
 
         newTaskButton.addEventListener("click", () => {
             renderNewTaskForm();
+            StorageLoader.update();
         });
+
+        StorageLoader.init();
+
+        renderLists();
+        renderTasks();
     }
 
     function renderNewListForm() {
@@ -122,6 +97,7 @@ const DisplayController = (function() {
             listName.addEventListener("click", () => {
                 ListStorage.resetActive();
                 list.active = true;
+                StorageLoader.update();
                 renderLists();
                 renderTasks();
             });
@@ -129,11 +105,13 @@ const DisplayController = (function() {
             const editButton = item.querySelector(`#edit-${list.id}`);
             editButton.addEventListener("click", () => {
                 renderEditListForm(list);
+                StorageLoader.update();
             });
 
             const deleteButton = item.querySelector(`#delete-${list.id}`);
             deleteButton.addEventListener("click", () => {
                 ListStorage.deleteList(list);
+                StorageLoader.update();
                 renderLists();
                 if (list.active) {
                     clearTasks();
@@ -161,6 +139,7 @@ const DisplayController = (function() {
         newTaskForm.addEventListener("submit", () => {
             const title = newTaskForm.querySelector("#title").value;
             const description = newTaskForm.querySelector("#description").value;
+            console.log(newTaskForm.querySelector("#due-date").value);
             const dueDate = new Date(
                 newTaskForm.querySelector("#due-date").value,
             );
@@ -250,11 +229,13 @@ const DisplayController = (function() {
                 const deleteButton = item.querySelector(`#delete-${task.id}`);
                 deleteButton.addEventListener("click", () => {
                     activeList.deleteTask(task);
+                    StorageLoader.update();
                     renderTasks();
                 });
 
                 const editButton = item.querySelector(`#edit-${task.id}`);
                 editButton.addEventListener("click", () => {
+                    StorageLoader.update();
                     renderEditTaskForm(task);
                 });
 
@@ -266,6 +247,7 @@ const DisplayController = (function() {
                 const toggleButton = item.querySelector(`#toggle-${task.id}`);
                 toggleButton.addEventListener("click", () => {
                     activeList.markTaskDone(task);
+                    StorageLoader.update();
                     renderTasks();
                 });
             });
@@ -296,11 +278,13 @@ const DisplayController = (function() {
                 const deleteButton = item.querySelector(`#delete-${task.id}`);
                 deleteButton.addEventListener("click", () => {
                     activeList.deleteCompletedTask(task);
+                    StorageLoader.update();
                     renderTasks();
                 });
 
                 const editButton = item.querySelector(`#edit-${task.id}`);
                 editButton.addEventListener("click", () => {
+                    StorageLoader.update();
                     renderEditTaskForm(task);
                 });
 
@@ -312,6 +296,7 @@ const DisplayController = (function() {
                 const toggleButton = item.querySelector(`#toggle-${task.id}`);
                 toggleButton.addEventListener("click", () => {
                     activeList.markTaskUndone(task);
+                    StorageLoader.update();
                     renderTasks();
                 });
             });
