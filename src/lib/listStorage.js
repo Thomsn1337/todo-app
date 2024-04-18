@@ -1,4 +1,4 @@
-const ListStorage = (function() {
+const ListStorage = (function () {
     const lists = [];
 
     function addNewList(list) {
@@ -12,6 +12,10 @@ const ListStorage = (function() {
 
     function getListIndex(list) {
         return lists.indexOf(list);
+    }
+
+    function getListById(id) {
+        return lists.find((list) => list.id === id);
     }
 
     function getActiveList() {
@@ -32,6 +36,7 @@ const ListStorage = (function() {
         addNewList,
         deleteList,
         getActiveList,
+        getListById,
         resetActive,
     };
 })();

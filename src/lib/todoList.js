@@ -1,8 +1,8 @@
 class TodoList {
-    constructor(name) {
+    constructor(name, id = Date.now(), active = false) {
         this.name = name;
-        this.id = Date.now();
-        this.active = false;
+        this.id = id;
+        this.active = active;
         this.tasks = [];
         this.completed = [];
     }
